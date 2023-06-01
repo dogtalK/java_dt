@@ -1,5 +1,7 @@
 package day3.homework;
 
+import java.util.Scanner;
+
 public class Ex1_conditional {
 	
 	/*
@@ -15,7 +17,17 @@ public class Ex1_conditional {
 	*/
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("input gender");
+		String gender = sc.nextLine();
+		
+		String man =  "m";
+		String woman =  "w";
+		
+		System.out.println(gender + " is " + gender.equals(woman));
+		
+		sc.close();
 
 	}
 

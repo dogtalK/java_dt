@@ -7,7 +7,6 @@ public class Ex2 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		
 		System.out.println("정수1을 입력해주세요.");
 		int num1 = sc.nextInt();
 		
@@ -28,7 +27,6 @@ public class Ex2 {
 		System.out.println("" + num1 + "%" + num2 + "=" + mod);
 		
 		sc.close();
-
 	}
 
 }

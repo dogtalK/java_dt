@@ -22,12 +22,26 @@ public class Ex1_conditional {
 		System.out.println("input gender");
 		String gender = sc.nextLine();
 		
-		String man =  "m";
 		String woman =  "w";
 		
-		System.out.println(gender + " is " + gender.equals(woman));
+		gender = woman.equals(gender) ? "true" : "false";
+		
+		System.out.println("Are you a women? " + gender);
 		
 		sc.close();
+		
+		/*강사님 코드
+		char gender;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("input gender");
+		gender = sc.next().charAt(0);
+		
+		boolean result = gender != 'm' ? true : false;
+		
+		System.out.println("Are you a women? " + result);
+		
+		sc.close();
+		*/
 
 	}
 

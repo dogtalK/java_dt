@@ -17,7 +17,7 @@ public class ScoreAverageEx {
 		System.out.println("input mathScore");
 		int mathScore = sc.nextInt();
 		
-		double avg = ((double)korScore + engScore + mathScore) / 3;
+		double avg = ((double)korScore + engScore + mathScore) / 3/*3.0*/;
 		
 		System.out.println("avg = " + avg);
 				

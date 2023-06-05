@@ -14,12 +14,14 @@ public class NumberEx {
 		
 		if(num % 2 == 0) {
 			System.out.println(num/2);
+			//num = num / 2;
 		}else if(num % 2 == 1) {
 			System.out.println(num+1);
+			//num = num + 1;
 		}else {
 			System.out.println("wrong input");
 		}
-		
+		//System.out.println(num);
 		sc.close();
 	}
 

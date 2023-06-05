@@ -11,12 +11,31 @@ public class TriangleEx {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("input num1");
-		int num1 = sc.nextInt();
+		int a = sc.nextInt();
 		System.out.println("input num2");
-		int num2 = sc.nextInt();
+		int b = sc.nextInt();
 		System.out.println("input num3");
-		int num3 = sc.nextInt();
+		int c = sc.nextInt();
+		int max;
 		
+		if(a>b) {
+			if(a>c) {
+				max = a;
+			}else {
+				max = c;
+			}
+		}else if(b>c) {
+			max = b;
+		}else {
+			max = c;
+		}
+		//max = a > b ? (a > c ? a: c) : (b > c ? b : c);
+		
+		if(a + b + c - max > max) {
+			System.out.println("able to create triangle");
+		}else {
+			System.out.println("unable to create triangle");
+		}
 		
 		
 		sc.close();

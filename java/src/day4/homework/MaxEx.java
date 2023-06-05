@@ -15,12 +15,17 @@ public class MaxEx {
 		
 		if(num1 > num2) {
 			System.out.println(num1);
+			//int max = num1;
 		}else if(num1 < num2) {
 			System.out.println(num2);
+			//int max = num1;
 		}else {
 			System.out.println("It's the same number");
 		}
+		//System.out.println("The greater number of "+ num1 +" or " + num2 + " is " + max);
 		
+		//max = num1 >= num2 ? num1 : num2
+		//System.out.println("The greater number of "+ num1 +" or " + num2 + " is " + max);
 		sc.close();
 	}
 

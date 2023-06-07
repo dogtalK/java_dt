@@ -26,6 +26,7 @@ public class TeamLeaderEx {
 			break;
 		case 1: case 2:
 			System.out.println("you are team member");
+			break;
 		}
 
 	}

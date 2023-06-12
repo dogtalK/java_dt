@@ -22,29 +22,27 @@ public class MethodArithmeticEx {
 	}
 	/** 산술 결과를 출력하는 코드
 	 *  매개변수 : 정수, 산술 연산자 => int, char
-	 *  리턴타입 : 정수 => int
+	 *  리턴타입 : 정수 => double
 	 *  메서드명 : arith
 	 */
 	public static double arith(int num1, int num2, char ch) {
-		int result = 0;
 		switch(ch) {
 		case '+':
-			result = num1 + num2;
-			break;
+			return num1 + num2;
+			//break; 위에 return이 있길 때문에 실행될 일이 없다 => 에러 발생
 		case '-':
-			result = num1 - num2;
-			break;
+			return num1 - num2;
 		case '*':
-			result = num1 * num2;
-			break;
+			return num1 * num2;
 		case '/':
-			result = num1 / num2;
-			break;
+			return (double)num1 / num2;
 		case '%':
-			result = num1 % num2;
-			break;
+			return num1 % num2;
+		default :
+			return 0.0;
+			//잘못된 연산자인 경우 예외처리를 해야 하는데 아직 안배워서 주석처리
+			//throw new RuntimeException("Wrong operator!");
 		}
 		
-		return result;
 	}
 }

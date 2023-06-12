@@ -12,6 +12,8 @@ public class MethodScoreEx {
 		int score = sc.nextInt();
 		
 		System.out.println(score + " is " + testScore(score));
+		
+		sc.close();
 	}
 
 	public static String testScore(int score) {
@@ -31,5 +33,17 @@ public class MethodScoreEx {
 		}
 		
 		return ch;
+	}
+	
+	public static String Score(int score) {
+		int res = (int)(score/10);
+		switch(res) {
+		case 10 : return "A";
+		case 9 : return "A";
+		case 8 : return "B";
+		case 7 : return "C";
+		case 6 : return "D";
+		default : return "F";
+		}
 	}
 }

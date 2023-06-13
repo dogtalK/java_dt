@@ -53,7 +53,7 @@ public class CarMain {
 	 * 클래스내부에 사용할 변수나 메서드를 private으로 선언해서 외부에서 접근하지 못하도록 막는것
 	 * 일반적으로 멤버변수는 private
 	 * 일반적으로 메서드는 public
-	 * 클래식변수 public, 싱글톤 private
+	 * 일반적으로 생성자는 public, 싱글톤의 경우 private
 	 */
 	
 }

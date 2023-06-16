@@ -10,6 +10,7 @@ public class VocabularyNoteEx {
 		word1.print();
 		word1.removeMeaning(1);
 		word1.print();
+	
 	}
 
 }

@@ -32,6 +32,10 @@ public class PolymorphismEx1 {
 		Radio1 radio2 = new Radio1();
 		AirConditioner1 aircon2 = new AirConditioner1();
 		RemoteControl1 remocon2 = new RemoteControl1();
+		
+		HomeAppliances appliance = tv2;//업캐스팅
+		remocon2.turnOff(appliance);
+		
 		remocon2.turnOn(tv2);//가전을 켜는 기능
 		remocon2.turnOn(aircon2);//가전을 켜는 기능
 		remocon2.turnOn(radio2);//가전을 켜는 기능

@@ -23,6 +23,14 @@ public class Product {
 		this.category = category;
 	}
 	
+	public Product(Product product) {
+		this.name = product.name;
+		this.modelName = product.modelName;
+		this.price = product.price;
+		this.amount = product.amount;
+		this.category = product.category;
+	}
+
 	//메서드
 	//<4>
 	/**제품 입고 기능 => 현재 수량에 주어진 수량을 누적*/ 
@@ -46,5 +54,13 @@ public class Product {
 	//<6>
 	private void accumulate(int amount) {
 		this.amount += amount;
+	}
+	//<7>
+	public void print() {
+		System.out.println("제품명 : " + name);
+		System.out.println("모델명 : " + modelName);
+		System.out.println("분류 : " + category);
+		System.out.println("제고 : " + amount);
+		System.out.println("가격 : " + price);
 	}
 }

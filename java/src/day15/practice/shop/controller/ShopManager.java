@@ -5,8 +5,9 @@ import java.util.Scanner;
 import day15.practice.shop.vo.Customer;
 import day15.practice.shop.vo.Product;
 import day15.practice.shop.vo.Sales;
+import day17.interfaceex.RunInterface;
 
-public class ShopManager {
+public class ShopManager implements RunInterface {
 	
 	/* 1.제품 판매 : 어떤 고객이 어떤 제품을 구매해는지 관리
 	 * 2.제품 입고 : 새 제품이 추가됨. 어떤 제품이 몇개 추가됐는지 관리

@@ -67,6 +67,10 @@ public class PhoneManager implements Program{
 				SearchPhoneNumber2(bookMark);				
 			}else if(!name.equals("")) {
 				SearchPhoneNumber3(name);
+			}else if(!group.equals("")) {
+				SearchPhoneNumber4(group);
+			}else {
+				
 			}
 			break;
 		case 4:break;
@@ -90,6 +94,14 @@ public class PhoneManager implements Program{
 		
 	}
 	private void SearchPhoneNumber2(int bookMark) {
+		// TODO Auto-generated method stub
+		
+	}
+	private void SearchPhoneNumber3(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+	private void SearchPhoneNumber4(String group) {
 		// TODO Auto-generated method stub
 		
 	}

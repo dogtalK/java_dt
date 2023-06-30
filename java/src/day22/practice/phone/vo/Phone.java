@@ -1,4 +1,4 @@
-package day22.practice.vo;
+package day22.practice.phone.vo;
 
 import java.util.Objects;
 

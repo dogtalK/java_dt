@@ -1,4 +1,4 @@
-package day22.practice.controller;
+package day22.practice.student.controller;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import day20.practice.student.controller.Program;
-import day22.practice.vo.Student;
+import day22.practice.student.vo.Student;
 
 public class StudentManager3 implements Program{
 

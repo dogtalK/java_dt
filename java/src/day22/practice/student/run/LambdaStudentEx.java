@@ -1,8 +1,8 @@
-package day22.practice.run;
+package day22.practice.student.run;
 
-import day22.practice.controller.StudentManager;
-import day22.practice.controller.StudentManager2;
-import day22.practice.controller.StudentManager3;
+import day22.practice.student.controller.StudentManager;
+import day22.practice.student.controller.StudentManager2;
+import day22.practice.student.controller.StudentManager3;
 
 public class LambdaStudentEx {
 	/*학생 정보를 출력하는 기능을 구현하세요

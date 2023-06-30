@@ -1,112 +1,108 @@
 package day22.practice.phone.controller;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-import day22.practice.phone.vo.Phone;
-import day22.practice.student.controller.Program;
+import day22.practice.phone.vo.PhoneBook;
 
 public class PhoneManager implements Program{
-	
-	private final static int EXIT = 4;
+
 	private Scanner sc = new Scanner(System.in);
+	private final static int EXIT = 4;
+	private PhoneBook pb = new PhoneBook();
 	
-	private List<Phone> list = Arrays.asList(
-			new Phone(010-1234-5678, 1, "a", "family"),
-			new Phone(010-1111-2222, 1, "b", "family"),
-			new Phone(010-1111-2222, 1, "c", "family"),
-			new Phone(010-1111-2222, 1, "d", "friend"),
-			new Phone(010-1212-3434, 0, "e", "friend"),
-			new Phone(010-1212-3434, 0, "f", "friend"),
-			new Phone(010-1212-3434, 0, "g", "friend")
-			);
+	@Override
+	public void printMenu() {
+		System.out.println("1. Insert");
+		System.out.println("2. Update");
+		System.out.println("3. Search");
+		System.out.println("4. EXIT");
+		System.out.print("Select Menu : ");
+		
+	}
 
 	@Override
 	public void run() {
 		int menu;
 		do {
-			try {
-				printMenu();
-				menu = sc.nextInt();
-				
-				runMenu(menu);
-			}catch(InputMismatchException e) {
-				menu = EXIT-1;
-				sc.nextLine();
-				System.out.println("Wrong Input!");
-			}
+			System.out.println("============");
+			printMenu();
+			menu = sc.nextInt();
+			runMenu(menu);
+			System.out.println("============");
+			
 		}while(menu != EXIT);
-	}
-	
-	@Override
-	public void printMenu() {
-		System.out.println("MENU");
-		System.out.println("1. Insert");
-		System.out.println("2. Update");
-		System.out.println("3. Search");
-		System.out.println("4. EXIT");
-		System.out.print("Menu Select : ");
 	}
 
 	@Override
 	public void runMenu(int menu) {
-		int phoneNumber = 0, bookMark = -1;
-		String name = "", group = "";
 		switch(menu) {
 		case 1:
-			InsertPhoneNumber();
+			insert();
 			break;
 		case 2:
-			UpdatePhoneNumber();
+			update();
 			break;
 		case 3:
-			if(phoneNumber !=0) {
-				SearchPhoneNumber1(phoneNumber);				
-			}else if(bookMark != -1) {
-				SearchPhoneNumber2(bookMark);				
-			}else if(!name.equals("")) {
-				SearchPhoneNumber3(name);
-			}else if(!group.equals("")) {
-				SearchPhoneNumber4(group);
-			}else {
-				
-			}
+			search();
 			break;
-		case 4:break;
-		default : System.out.println("Wrong number");
+		case 4:
+			System.out.println("EXIT");
+			break;
+		default :
+			System.out.println("Wrong Menu");
+		}	
+	}
+
+	private void search() {
+		// 검색할 이름을 입력
+		System.out.println("name : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		
+		//검색 결과를 출력
+		pb.print(s->s.getName().contains(name));
+		//pb.print(s->true);//전체 출력
+		
+	}
+
+	private void update() {
+		//이름과, 수정할 이름과 수정할 전화번호를 입력
+		System.out.print("name : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		
+		System.out.println("Update name : ");
+		String updateName = sc.nextLine();
+		
+		System.out.print("number : ");
+		String number = sc.nextLine();
+		
+		//전화번호부에 수정해서 성공하면 성공이라고
+		if(pb.update(name, updateName, number)){
+			System.out.println("Update Success");
+		}
+		//실패하면 실패했다고 출력
+		else {
+			System.out.println("Update Fail");
 		}
 		
 	}
 
-	private void InsertPhoneNumber() {
-		// TODO Auto-generated method stub
+	private void insert() {
+		//이름과 전화번호를 입력
+		System.out.print("name : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		System.out.print("number : ");
+		String number = sc.nextLine();
 		
+		//전화번호부에 추가해서 성공하면 성공이라고
+		if(pb.insertPhone(name, number)) {
+			System.out.println("Insert Success");
+		}
+		//실패하면 실패했다고 출력
+		else {
+			System.out.println("Insert Fail");
+		}
 	}
-
-	private void UpdatePhoneNumber() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void SearchPhoneNumber1(int phoneNumber) {
-		// TODO Auto-generated method stub
-		
-	}
-	private void SearchPhoneNumber2(int bookMark) {
-		// TODO Auto-generated method stub
-		
-	}
-	private void SearchPhoneNumber3(String name) {
-		// TODO Auto-generated method stub
-		
-	}
-	private void SearchPhoneNumber4(String group) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
 }

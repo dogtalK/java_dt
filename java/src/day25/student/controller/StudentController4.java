@@ -1,5 +1,12 @@
 package day25.student.controller;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +21,9 @@ public class StudentController4 {
 	public void run() {
 		
 		int menu;
+		String fileName = "src/day25/student/Student.txt";
 		
+		load(fileName);
 		do {
 			//메뉴 출력
 			printMenu();
@@ -24,7 +33,40 @@ public class StudentController4 {
 			runMenu(menu);
 			
 		}while(menu != 3);
+		save(fileName);
 		sc.close();
+	}
+	//"src/day25/student/Student.txt"
+	private void save(String fileName) {
+		//학생 정보를 저장 => 리스트 => 하나씩 꺼내서 저장
+		//저장 => OutputStream
+		//객체단위로 저장 => ObjectOutputStream
+		try(FileOutputStream fos = new FileOutputStream(fileName);
+				ObjectOutputStream oos = new ObjectOutputStream(fos)){
+					for(Student tmp : list) {
+						oos.writeObject(tmp);
+					}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+	private void load(String fileName) {
+		try(ObjectInputStream ois
+				= new ObjectInputStream(new FileInputStream(fileName))){
+			while(true) {
+				Student tmp = (Student)ois.readObject();
+				list.add(tmp);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("don't find File");
+		} catch (EOFException e) {
+			System.out.println("Finished reading the File");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			//ObjectinputStream을 이용하여 객체단위로 읽어올 때 클래스가 Serializable인터페이스를 구현하지 않으면 발생
+			System.out.println("don't find Student class");
+		}
 	}
 	private void printMenu() {
 		System.out.println("메뉴");

@@ -24,3 +24,5 @@ hs_err_pid*
 replay_pid*
 java/.classpath
 java/.project
+front/video/sample.mp4
+*.jpg

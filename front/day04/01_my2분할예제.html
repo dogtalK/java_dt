@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+.main{
+	width: 480px; height: 480px; padding: 10px;
+	border: 1px solid red;
+}
+.sub1{
+	width: 235px; height: 480px; 
+	background-color: blueviolet; float: left; color:rgb(235, 235, 250);
+}
+.sub2{
+	width: 235px; height: 480px; 
+	background-color: darkblue; float: right; color: rgb(235, 235, 250);
+}
+main::after{
+	clear: both;
+}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="sub1">1</div>
+		<div class="sub2"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.container{
+			width: 600px; height: 200px; margin: 0 auto;
+			text-align: center; border: 1px solid red;
+		}
+		.container::after{
+			content: ''; display: block; clear: both;
+		}
+		.box{
+			width: calc(100% / 3); height: 100%; line-height: 200px; float: left; 
+			background-color: yellow; box-shadow: 1px 1px 1px 1px red;
+		}
+		a{
+			text-decoration: none; color: black; 
+			font-size: 20px; font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box box1"><a href="#">menu1</a></div>
+		<div class="box box2"><a href="#">menu2</a></div>
+		<div class="box box3"><a href="#">menu3</a></div>
+	</div>
+	
+</body>
+</html>

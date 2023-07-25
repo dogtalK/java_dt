@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.menu{
+			display: flex; width: 240px; height: 50px;
+			border: 3px solid deepskyblue; 
+		}
+		.menuBox{
+			width: calc(100% / 3); height: 100%; background-color: blueviolet;
+			text-decoration: none; color: white; 
+			font-size: large; font-weight: bold;
+			text-align: center; line-height: 50px;
+		}
+		.menuBox:nth-child(2n){
+			background-color: crimson;
+		}
+	</style>
+</head>
+<body>
+	<div class="menu">
+		<a href="#" class="menuBox box1">메뉴1</a>
+		<a href="#" class="menuBox box2">메뉴2</a>
+		<a href="#" class="menuBox box3">메뉴3</a>
+	</div>
+</body>
+</html>

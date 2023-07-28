@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		*{
+			margin: 0; padding: 0;
+		}
+		body{
+			width: 100%; height: 100%; overflow-x: hidden;
+		}
+		.box{
+			position: relative;
+		}
+		.btn-menu{
+			width: 50px; height: 50px; position: absolute; top: 0; right: 10px;
+		}
+		.btn-re{
+			width: 50px; height: 50px; position: absolute; top: 0; right: 10px;
+			display: none;
+		}
+		.menu-box{
+			width: 300px; height: 700px; background-color: coral;
+			position: absolute; top: 60px; right: -300px;
+			
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<button class="btn-menu">menu</button>
+		<button class="btn-re">re</button>
+		<div class="menu-box"></div>
+	</div>
+
+	<script>
+		$('.btn-menu').click(function(){
+			$('.btn-re').show();
+			$('.menu-box').animate({right : '10px'}, 800);
+		});
+		$('.btn-re').click(function(){
+			$('.btn-re').hide();
+			$('.menu-box').animate({right : '-300px'}, 800);
+		});
+	</script>
+</body>
+</html>

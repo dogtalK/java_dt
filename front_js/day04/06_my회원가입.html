@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		*{margin: 0; padding: 0;}
+		.box{
+			width: 500px; height: 500px;
+			text-align: center;
+		}
+		.inner-box+.inner-box{
+			margin-top: 10px;
+		}
+		.input-text{
+			width: 200px; height: 30px; padding-left: 5px;
+			border: 2px solid rgba(0,0,0,0.3); border-radius: 8px;
+			line-height: 30px; background: transparent
+		}
+		span{
+			line-height: 35px; color: white;
+		}
+		#id{margin-top: calc(50% - 130px);}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="inner-box">
+			<input type="text" class="input-text" id="id" value="아이디"><br>
+			<span class="check1">.</span><br>
+		</div>
+		<div class="inner-box">
+			<input type="text" class="input-text" id="password" value="비밀번호"><br>
+			<span class="check2">.</span><br>
+		</div>
+		<div class="inner-box">
+			<input type="text" class="input-text" id="passwordCheck" value="비밀번호 확인"><br>
+			<span class="check3">.</span><br>
+		</div>
+		<div class="inner-box">
+			<input type="text" class="input-text" id="email" value="이메일"><br>
+			<span class="check4">.</span><br>
+		</div>
+	</div>
+
+	<script>
+		let idRegex = /[a-zA-Z][0-9a-zA-Z]{7,12}$/;
+		let passwordRegex = /[a-zA-Z][0-9a-zA-Z]{7,19}$/;
+		$('#id').change(function(){
+			let text = $(this).val();
+			if(idRegex.test(text)){
+				$('.check1').text('정규표현식에 맞습니다.');
+			}else{
+				$('.check1').text('정규표현식과 다릅니다.');
+			}
+			$('.check1').css('color','red')
+		});
+		$('#password').change(function(){
+			let text = $(this).val();
+			if(passwordRegex.test(text)){
+				$('.check2').text('정규표현식에 맞습니다.');
+			}else{
+				$('.check2').text('정규표현식과 다릅니다.');
+			}
+			$('.check2').css('color','red')
+		});
+		$('#passwordCheck').change(function(){
+			if($('#password').val() == $('#passwordCheck').val()){
+				$('.check3').text('비밀번호가 일치합니다.');
+			}else{
+				$('.check3').text('비밀번호가 다릅니다.');
+			}
+			$('.check3').css('color','red')
+		});
+	</script>
+</body>
+</html>

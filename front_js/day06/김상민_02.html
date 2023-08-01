@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{margin: auto; padding: 0;}
+		body{ background-color: rgb(222, 234, 246);}
+		span{display: inline-block; width: 105px; font-weight: bold;}
+		input{
+			width: 300px; height: 24px; font-size: 12px;
+			outline: none; border: 0; border-bottom: 1px dashed black; 
+			background-color: rgb(237, 237, 237);}
+		.box{
+			margin-top: 30px; padding: 30px 0 10px 10px; width: 440px;
+			background-color: rgb(237, 237, 237); border: 1px solid rgba(0, 0, 0, 0.12);
+		}
+		.box-content{
+			margin-bottom: 20px;
+		}
+		#password{margin-bottom: 10px;}
+		.email-text{text-align: center;}
+		.btn{
+			width: 430px; height: 40px; margin-top: 20px;
+			color: darkgreen; font-weight: bold;
+			background-color: rgb(197, 224, 181); 
+			border: 1px solid rgba(0, 0, 0, 0.06);
+		}
+		.password-inpo{
+			font-size: 12px; font-weight: 400; color: rgba(0, 0, 0, 0.6);
+			width: 280px; display: none;
+		}
+	</style>
+	<script src="../front_js/js/jquery.min.js"></script>
+</head>
+<body>
+	<form action="">
+		<div class="box">
+			<div id="id" class="box-content">
+				<span>아이디</span>
+				<input type="text" name="id" class="id-text" autocomplete="off">
+			</div>
+			<div id="password" class="box-content">
+				<span>패스워드</span>
+				<input type="text" name="pw" class="password-text" autocomplete="off">
+				<span></span>
+				<span class="password-inpo">영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자</span>
+			</div>
+			<div id="check" class="box-content">
+				<span>패스워드 확인</span>
+				<input type="text" name="pw2" class="check-text" autocomplete="off">
+			</div>
+			<div id="email" class="box-content">
+				<span>이메일</span>
+				<input type="text" name="em" class="email-text" value="@" autocomplete="off">
+			</div>
+			<div id="locate" class="box-content">
+				<span>주소</span>
+				<input type="text" name="lo" class="locate-text"  autocomplete="off">
+			</div>
+			<button class="btn">가 입</button>
+		</div>
+		</form>
+	<script>
+		$('input').click(function(){
+			if($(this).val() == '정규표현식과 다릅니다'){
+				$(this).val('');
+				$(this).css('color', 'black');
+			}
+		});
+
+		$('.password-text').click(function(){
+			$('.password-inpo').show();
+		});
+
+		$('.email-text').click(function(){
+			$('.email-text').val('');
+			$('.email-text').css('text-align', 'start');
+		});
+
+		$('[name=id]').change(checkId);
+		$('[name=pw]').change(checkPw);
+		$('[name=pw2]').change(checkPw2);
+		$('[name=em1]').change(checkEm);
+
+		$('form').submit(function(){
+			let ok = true;
+			if(!checkId()){
+				ok = false;
+				alert('필수 입력 항목 입니다');
+			}
+			if(!checkPw()){
+				ok = false;
+				alert('필수 입력 항목 입니다');
+			}
+			if(!checkPw2()){
+				ok = false;
+				alert('필수 입력 항목 입니다');
+			}
+			if(!checkEmail()){
+				ok = false;
+			}
+			return ok;
+		});
+
+		function checkId(){
+			let id = $('[name=id]').val();
+			let regex = /^\w{8,13}$/;
+			if(regex.test(id)){
+				return true;
+			}else{
+				$(this).val('정규표현식과 다릅니다');
+				$(this).css('color', 'red');
+				return false;
+			};
+		};
+		function checkPw(){
+			let pw = $('[name=pw]').val();
+			let regex = /^[a-zA-Z0-9!@#$]{8,32}$/;
+			if(regex.test(pw)){
+				return true;
+			}else{
+				$(this).val('정규표현식과 다릅니다');
+				$(this).css('color', 'red');
+				return false;
+			};
+		};
+		function checkPw2(){
+			let pw = $('[name=pw]').val();
+			let pw2 = $('[name=pw2]').val();
+			if(pw == pw2){
+				return true;
+			}else{
+				$(this).val('정규표현식과 다릅니다');
+				$(this).css('color', 'red');
+				return false;
+			};
+		};
+		function checkEm(){
+			let email = $('[name=email]').val();
+			let regex = /^[a-zA-Z0-9_]+@[a-zA-Z0-9]+(.[a-zA-Z0-9]+)+$/;
+			if(regex.test(email)){
+				return true;
+			}else{
+				$(this).val('정규표현식과 다릅니다');
+				$(this).css('color', 'red');
+				return false;
+			};
+		};
+	</script>
+</body>
+</html>

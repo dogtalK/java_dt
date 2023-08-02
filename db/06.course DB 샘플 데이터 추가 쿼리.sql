@@ -120,6 +120,6 @@ where
 insert into course(subject_code,student_num,room,professor_name,schedule,year,semester) 
 values('MSC002', 2023160001, '361', '이순신','월3,4,5',2023,'1'),
 ('MSC002', 2023160002, '361', '이순신','월3,4,5',2023,'1');
-
+-- 방송학과 학생 중 유재석 학생이 글쓰기를 수강
 insert into course(subject_code,student_num,room,professor_name,schedule,year,semester) 
 values('BSE002', 2023135002, '미디어관 201호', '한석봉','화1,2,3',2023,'1');

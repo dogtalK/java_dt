@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" 
+	pageEncoding="utf-8" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -19,17 +20,22 @@
   
   <!-- Links -->
   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="<c:url value='/signup' /> ">회원가입</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 2</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link 3</a>
-    </li>
+  	<c:if test="${user == null}">
+	    <li class="nav-item">
+	      <a class="nav-link" href="<c:url value='/member/signup' />">회원가입</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="<c:url value='/member/login'/>">로그인</a>
+	    </li>
+    </c:if>
+    <c:if test="${user != null }">
+	    <li class="nav-item">
+	      <a class="nav-link" href="<c:url value='/member/logout'/>">로그아웃</a>
+	    </li>
+    </c:if>
   </ul>
 </nav>
+
 
 </body>
 </html>

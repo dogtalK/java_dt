@@ -1,5 +1,7 @@
 package kr.kh.study.dao;
 
-public class MemberDAO {
+public interface MemberDAO {
+
+	int selectCountMember();
 
 }

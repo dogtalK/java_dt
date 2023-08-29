@@ -6,8 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,11 +36,11 @@ public class MemberController {
 		return "message";
 	}
 	
-	@GetMapping(value="/member/login")
+	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String memberLogin() {
 		return "member/login";
 	}
-	@PostMapping(value="/member/login")
+	@RequestMapping(value="/member/login", method=RequestMethod.POST)
 	public String memberLoginPost(MemberVO member, Model model) {
 		Message msg = new Message("/member/login", "로그인에 실패했습니다.");
 
@@ -54,7 +52,7 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		return "message";
 	}
-	@GetMapping("/member/logout")
+	@RequestMapping(value="/member/logout", method=RequestMethod.GET)
 	public String memberLogout(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");

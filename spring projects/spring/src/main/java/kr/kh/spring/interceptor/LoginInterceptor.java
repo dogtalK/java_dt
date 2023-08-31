@@ -14,15 +14,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(
 		HttpServletRequest request,
-		HttpServletResponse respose,
+		HttpServletResponse response,
 		Object handler,
-		ModelAndView mv) {
+		ModelAndView modelAndView) throws Exception {
 		
-		MemberVO user = (MemberVO)mv.getModel().get("user");
+		MemberVO user = (MemberVO)modelAndView.getModel().get("user");
 		
 		if(user != null ) {
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
+			request.getSession().setAttribute("user", user);
 		}
 	}
 }

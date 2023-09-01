@@ -29,13 +29,27 @@
 			<div class="form-control">${board.bo_up_date_str}</div>
 		</div>
 	</c:if>
-	<div class="form-gruop clearfix">
+	<div class="form-group clearfix">
 		<button class="btn btn-outline-primary btn-up col-6 float-left">추천(${board.bo_up })</button>
 		<button class="btn btn-outline-danger btn-up col-6 float-right">비추천(${board.bo_down })</button>
 	</div>
 	<div class="form-group">
 		<label>내용</label>
 		<div class="form-control" style="min-height: 400px">${board.bo_contents}</div>
+	</div>
+	
+	<div class="form-group">
+		<c:choose>
+			<c:when test="${board.fileVoList.size() != 0 }">
+				<label>첨부파일</label>
+				<c:forEach items="${board.fileVoList }" var="file">
+					<a class="form-control" href="<c:url value='/download${file.fi_name}'/>" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<label>첨부파일 없음</label>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<a href="<c:url value='/board/list${cri.currentUrl }'/>" class="btn btn-outline-primary">목록으로</a>
 </body>

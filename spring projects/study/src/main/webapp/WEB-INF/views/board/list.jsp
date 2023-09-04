@@ -1,13 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" 
-	pageEncoding="utf-8" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>스프링</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>게시판</h1>
+	<h1>게시글 리스트</h1>
 	<table border="1">
 		<thead>
 			<tr>
@@ -22,10 +23,10 @@
 			<c:forEach items="${list}" var="board">
 				<tr>
 					<td>${board.bo_num}</td>
-					<td><a href="<c:url value='/board/detail$&bo_num=${board.bo_num}'/>">${board.bo_title}</a></td>
+					<td><a href="<c:url value='/board/detail?bo_num=${board.bo_num}'/>">${board.bo_title }</a></td>
 					<td>${board.bo_me_id }</td>
 					<td>${board.bo_views }</td>
-					<td>${board.bo_up }/${board.bo_down }</td>
+					<td>${board.bo_up}/${board.bo_down}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

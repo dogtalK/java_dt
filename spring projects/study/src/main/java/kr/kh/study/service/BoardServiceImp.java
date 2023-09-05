@@ -2,6 +2,7 @@ package kr.kh.study.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.study.dao.BoardDAO;
+import kr.kh.study.pagination.Criteria;
 import kr.kh.study.util.UploadFileUtils;
 import kr.kh.study.vo.BoardVO;
 import kr.kh.study.vo.FileVO;
@@ -23,10 +25,13 @@ public class BoardServiceImp implements BoardService{
 	String uploadPath = "D:\\uploadfiles";
 
 	@Override
-	public List<BoardVO> getBoardList() {
-		//매개변수체크(생략)
+	public List<BoardVO> getBoardList(Criteria cri) {
+		//매개변수체크
+		if(cri == null) {
+			cri = new Criteria();
+		}
 		//다오에게 게시글 리스트를 가져오라고 시키고
-		List<BoardVO> list = boardDao.selectBoardList();
+		List<BoardVO> list = boardDao.selectBoardList(cri);
 		//가져오면 반환
 		return list;
 	}
@@ -94,7 +99,7 @@ public class BoardServiceImp implements BoardService{
 	}
 
 	@Override
-	public boolean update(BoardVO board, MemberVO user) {
+	public boolean update(BoardVO board, MemberVO user, MultipartFile[] files, int[] delNums) {
 		if(user == null || user.getMe_id() == null) {
 			return false;
 		}
@@ -105,8 +110,24 @@ public class BoardServiceImp implements BoardService{
 		if(dbBoard == null || !dbBoard.getBo_me_id().equals(user.getMe_id())) {
 			return false;
 		}
+		//추가된 첨부파일 업로드 및 DB 추가
+		uploadFiles(files, board.getBo_num());
+		//삭제된 첨부파일 삭제 및 DB 제거
+		deleteFiles(delNums);
 		boolean res = boardDao.updateBoard(board);
 		return res;
+	}
+
+	private void deleteFiles(int[] delNums) {
+		if(delNums == null || delNums.length == 0) {
+			return ;
+		}
+		List<FileVO> fileList = new ArrayList<FileVO>();
+		for(int fi_num : delNums) {
+			FileVO fileVo = boardDao.selectFile(fi_num);
+			fileList.add(fileVo);
+		}
+		deleteFiles(fileList);
 	}
 
 	@Override
@@ -149,6 +170,11 @@ public class BoardServiceImp implements BoardService{
 			return null;
 		}
 		return boardDao.selectFileList(bo_num);
+	}
+
+	@Override
+	public int getBoardTotalCount() {
+		return boardDao.selectBoardTotalCount();
 	}
 	
 	

@@ -92,6 +92,12 @@
 			</div>
 		</div>
 		<!-- 댓글 페이지네이션 -->
+		<ul class="pagination justify-content-center mt-3 comment-pagination">
+		    <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+		    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+		    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+		    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+		</ul>
 	</div>
 	<!-- 추천 기능 자바스크립트 -->
 	<script type="text/javascript">
@@ -191,35 +197,93 @@
 			getCommentList(cri);
 		});
 	});
+	
+	/*
+	$(document).on('click', '.btn-comment-delete', function(){
+		alert('삭제 버튼');
+	})
+	*/
+	
 	let cri = {
 			page : 1,
 			perPageNum : 2,
 	}
 	//게시글이 화면에 출력되고 이어서 댓글이 화면에 출력되어야 하기 때문에 이벤트 등록없이 바로 호출
 	getCommentList(cri);
-	
 	//현재 페이지 정보가 주어지면 현재 페이지에 맞는 댓글 리스트를 가져와서 화면에 출력하는 함수 
 	function getCommentList(cri){
 		ajaxJsonToJson(false,'post','/comment/list/${board.bo_num}', cri ,(data)=>{
-			let str = '';
-			if(data.list.length == 0){
-				str = '<div class="border rounded-sm border-danger p-3 mt-3">등록된 댓글이 없습니다.</div>';
+			//댓글 리스트 추가
+			createCommentList(data.list, '.comment-list');
+			
+			createPagination(data.pm, '.comment-pagination');
+		});
+	}
+	function createPagination(pm, target){
+		let str = '';
+		if(pm.prev){
+			str += `<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="cri.page=\${pm.startPage-1};getCommentList(cri)">이전</a></li>`;
+		}
+		for(i=pm.startPage; i<=pm.endPage; i++){
+			let active = pm.cri.page == i ? 'active' : '';
+			str += `
+			<li class="page-item \${active}">
+				<a class="page-link" href="javascript:void(0);" onclick="cri.page=\${i};getCommentList(cri)">\${i}</a>
+			</li>`;
+		}
+		if(pm.next){
+			str += `<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="cri.page=\${pm.endPage+1};getCommentList(cri)">다음</a></li>`;
+		}
+		$(target).html(str);
+	}
+	
+	//댓글 리스트가 주어지면 댓글을 만들어서 target안에 넣어주는 함수 
+	function createCommentList(commentList, target){
+		let str = '';
+		if(commentList.length == 0){
+			str = '<div class="border rounded-sm border-danger p-3 mt-3">등록된 댓글이 없습니다.</div>';
+		}
+		for(comment of commentList){
+			let btnStr = '';
+			if('${user.me_id}' == comment.co_me_id){
+				btnStr = `
+				<div>
+					<button class="btn btn-outline-warning btn-comment-update" data-num="\${comment.co_num}">수정</button>
+					<button class="btn btn-outline-danger btn-comment-delete" onclick="deleteComment(\${comment.co_num})">삭제</button>
+				</div>
+				`;
 			}
-			for(comment of data.list){
-				str += `
-					<div class="border rounded-sm border-danger p-3 mt-3">
-						<div class="">\${comment.co_me_id}</div>
-						<div class="input-group mb-3">
-						    <div class="col-9">
-						        \${comment.co_contents}
-						    </div>
-						    <div class="col-3">
-						    	작성일
-						    </div>
-						</div>
-					</div>`;
+			str += `
+				<div class="border rounded-sm border-danger p-3 mt-3">
+					<div class="">\${comment.co_me_id}</div>
+					<div class="input-group mb-3">
+					    <div class="col-9">
+					        \${comment.co_contents}
+					    </div>
+					    <div class="col-3">
+					    	작성일
+					    </div>
+					</div>
+					\${btnStr}
+				</div>`;
+		}
+		$(target).html(str);
+	}
+	//댓글을 삭제하는 함수
+	function deleteComment(co_num){
+		let comment = { 
+				co_num : co_num,
+				co_me_id : '${user.me_id}',
+				co_bo_num : '${board.bo_num}'
+		}
+		ajaxJsonToJson(false,'post','/comment/delete', comment ,(data)=>{
+			if(data.res){
+				alert('댓글을 삭제했습니다.')
+			}else{
+				alert('댓글을 삭제하지 못했습니다.')
 			}
-			$('.comment-list').html(str);
+			cri.page = 1;
+			getCommentList(cri);
 		});
 	}
 </script>

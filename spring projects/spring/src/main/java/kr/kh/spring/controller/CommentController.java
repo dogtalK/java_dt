@@ -30,7 +30,6 @@ public class CommentController {
 	@PostMapping("/comment/list/{bo_num}")
 	public Map<String, Object> list(@RequestBody Criteria cri, @PathVariable("bo_num")int bo_num){
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(bo_num);
 		List<CommentVO> list = commentService.getCommentList(cri, bo_num);
 		map.put("list", list);
 		return map;

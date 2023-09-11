@@ -49,21 +49,30 @@ public class MemberServiceImp implements MemberService{
 
 	@Override
 	public MemberVO login(MemberVO member) {
-		if(member == null || 
-				member.getMe_id() == null || 
-				member.getMe_pw() == null) {
-				return null;
-			}
-		
-		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
-		if(dbMember == null) {
+		if(member == null || member.getMe_id() == null || member.getMe_pw() == null) {
 			return null;
 		}
-		if(passwordEncoder.matches(member.getMe_pw(), dbMember.getMe_pw())) {
-			return dbMember;
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		if(user == null) {
+			return null;
 		}
-		
+		if(passwordEncoder.matches(member.getMe_pw(), user.getMe_pw())) {
+			return user;
+		}
 		return null;
+	}
+
+	@Override
+	public void updateMemberSesseion(MemberVO user) {
+		if(user == null || user.getMe_id() == null) {
+			return;
+		}
+		memberDao.updateMemberSession(user);
+	}
+
+	@Override
+	public MemberVO getMemberBySession(String me_session_id) {
+		return memberDao.selectMemberBySession(me_session_id);
 	}
 
 	

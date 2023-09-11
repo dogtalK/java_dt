@@ -22,7 +22,7 @@ public class MemberController {
 		return "member/signup";
 	}
 	
-	@PostMapping("/member/signup")
+	@PostMapping("/member/signup") //@RequestMapping(value="/member/signup", method=RequestMethod.POST)
 	public String memberSignupPost(Model model, MemberVO member) {
 		String msg , url;
 		
@@ -37,40 +37,37 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		return "util/message";
 	}
-	
 	@GetMapping("/member/login")
 	public String memberLogin() {
 		return "/member/login";
 	}
-	
 	@PostMapping("/member/login")
 	public String memberLoginPost(Model model, MemberVO member) {
 		String msg , url;
-		MemberVO user = memberService.login(member); 
+		MemberVO user = memberService.login(member);
 		
 		if(user != null) {
 			msg = "로그인 성공!";
 			url = "/";
+			user.setAutoLogin(member.isAutoLogin());
 		}else {
 			msg = "로그인 실패!";
 			url = "/member/login"; 
 		}
-		model.addAttribute("user", user);
 		model.addAttribute("url", url);
 		model.addAttribute("msg", msg);
+		model.addAttribute("user", user);
 		return "util/message";
 	}
-	
 	@GetMapping("/member/logout")
-	public String memberLogout(HttpSession session, Model model) {
-		String msg="로그아웃 성공" , url="/";
+	public String memberLogout(Model model, HttpSession session) {
+		String msg="로그아웃 성공!" , url="/";
 		
 		session.removeAttribute("user");
 		
-		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
-		
-		return "util/message";
+		model.addAttribute("msg", msg);
+
+		return "/util/message";
 	}
-	
 }

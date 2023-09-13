@@ -13,9 +13,9 @@ CREATE TABLE `employee` (
 	`ep_phone_num`	VARCHAR(15)	NOT NULL,
 	`ep_dm_num`	INT	NOT NULL DEFAULT 1,
 	`ep_po_num`	INT	NOT NULL DEFAULT 1,
-	`ep_st_num`	int	NOT NULL DEFAULT 1,
-	`ep_leave`	int	NOT NULL DEFAULT 15,
-    `ep_salay`	VARCHAR(255)	NOT NULL
+	`ep_st_num`	INT	NOT NULL DEFAULT 1,
+	`ep_leave`	INT	NOT NULL DEFAULT 15,
+    `ep_salay`	INT	NOT NULL
 );
 
 DROP TABLE IF EXISTS `department`;

@@ -94,7 +94,7 @@ VALUES
     ('2023-08-01', 22, '월급', '7월 월급', 250), ('2023-08-01', 23, '월급', '7월 월급', 250), ('2023-08-01', 24, '월급', '7월 월급', 250);
 
 -- 근태정보 테이블 데이터 추가
-INSERT INTO `ATTENDANCE_TYPE`(AT_TYPE) VALUES('결근'),('출근'),('재택'),('출장');
+INSERT INTO `ATTENDANCE_TYPE`(AT_TYPE) VALUES('결근'),('출근'),('재택'),('출장'),('조퇴');
 
 -- 출결관리 테이블 데이터 추가
 INSERT INTO `ATTENDANCE`(AD_DATE, AD_EP_ID, AD_AT_NUM) 

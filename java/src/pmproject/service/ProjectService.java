@@ -16,6 +16,17 @@ public interface ProjectService {
 
 	boolean insertProject(ProjectVO project);
 
+	ProjectVO selectProject(String name);
+
+	boolean updateName(String name, String newName);
+
+	boolean updateStart_date(String name, String newStart_date);
+
+	boolean updateEnd_date(String name, String newEnd_date);
+
+	boolean updateState(String name, String newState);
+
+
 	
 
 

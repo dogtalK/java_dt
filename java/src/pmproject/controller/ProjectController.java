@@ -29,6 +29,8 @@ public class ProjectController {
 		System.out.println("1. 프로젝트 조회");
 		System.out.println("2. 프로젝트 추가");
 		System.out.println("3. 프로젝트 수정");
+		//프로젝트 인원 검색
+		//조회,추가,수정
 		System.out.println("4. 이전 메뉴");
 		System.out.println("=================");
 		System.out.print("메뉴 선택 : ");
@@ -62,9 +64,9 @@ public class ProjectController {
 
 
 	private void projectAdd() {
-		
+
 		System.out.print("프로젝트 명 : ");
-		sc.next();
+		sc.nextLine();
 		String name = sc.nextLine();
 		System.out.print("시작일 : ");
 		String start_date = sc.nextLine();

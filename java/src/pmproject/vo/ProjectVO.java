@@ -1,7 +1,5 @@
 package pmproject.vo;
 
-import java.text.SimpleDateFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

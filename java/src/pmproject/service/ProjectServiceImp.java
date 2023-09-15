@@ -52,7 +52,6 @@ public class ProjectServiceImp implements ProjectService{
 	@Override
 	public boolean insertProject(ProjectVO project) {
 		if(project == null || project.getPj_name() == null) {
-			System.out.println("여기문제");
 			return false;
 		}
 		ProjectVO dbProject = projectDao.selectProject(project.getPj_name());

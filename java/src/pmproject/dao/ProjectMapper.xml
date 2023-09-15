@@ -20,6 +20,6 @@
   	</select>
   	<insert id="insertProject">
 		insert into project(pj_name, pj_start_date, pj_end_date, pj_state) 
-		values(#{pj_name}, #{pj_start_date}, #{pj_end_date}, #{pj_state}); 
+		values(#{project.pj_name}, #{project.pj_start_date}, #{project.pj_end_date}, #{project.pj_state}); 
 	</insert>
 </mapper>

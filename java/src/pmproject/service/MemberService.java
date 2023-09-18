@@ -4,6 +4,7 @@ import java.util.List;
 
 import pmproject.vo.DeptVO;
 import pmproject.vo.MemberVO;
+import pmproject.vo.Project_infoVO;
 import pmproject.vo.SalaryHistoryVO;
 import pmproject.vo.SalaryVO;
 import pmproject.vo.TransferVO;
@@ -31,5 +32,6 @@ public interface MemberService {
 	List<TransferVO> SearchTransfer(String ep_id);
 
 	int selectMemberCount();
+
 
 }

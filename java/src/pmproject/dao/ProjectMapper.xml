@@ -45,4 +45,14 @@
 	<select id="selectProjectNum" resultType="pmproject.vo.ProjectVO">
   		select * from project where pj_num = #{pj_num};
   	</select>
+  	<select id="selectPjAllEmp1" resultType="pmproject.vo.ProjectVO">
+  		select * from project;
+  	</select>
+  	<select id="selectPjAllEmp2" resultType="pmproject.vo.Project_infoVO">
+  		select * from project_info;
+  	</select>
+  	<insert id="insertProject_info">
+  		insert into project_info(pi_ep_id, pi_pj_num, pi_role) 
+		values(#{project_info.pi_ep_id}, #{project_info.pi_pj_num}, #{project_info.pi_role}); 
+  	</insert>
 </mapper>

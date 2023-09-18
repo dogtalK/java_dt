@@ -33,6 +33,12 @@ public interface ProjectService {
 
 	ProjectVO selectProject(int num);
 
+	List<Project_infoVO> getPjAllEmp2();
+
+	List<ProjectVO> getPjAllEmp1();
+
+	boolean insertProject_info(Project_infoVO project_info);
+
 	
 
 

@@ -7,6 +7,7 @@ import pmproject.service.MemberService;
 import pmproject.service.MemberServiceImp;
 import pmproject.service.ProjectService;
 import pmproject.service.ProjectServiceImp;
+import pmproject.vo.MemberVO;
 import pmproject.vo.ProjectVO;
 import pmproject.vo.Project_infoVO;
 
@@ -259,7 +260,8 @@ public class ProjectController {
 		System.out.println("1. 프로젝트 직원조회");
 		System.out.println("2. 프로젝트 직원추가");
 		System.out.println("3. 프로젝트 직원수정");
-		System.out.println("4. 이전 메뉴");
+		System.out.println("4. 프로젝트 직원삭제");
+		System.out.println("5. 이전 메뉴");
 		System.out.println("=================");
 		System.out.print("메뉴 선택 : ");
 		int pjMenu = sc.nextInt();
@@ -275,6 +277,9 @@ public class ProjectController {
 			projectEmpModify();
 			break;
 		case 4:
+			projectEmpDelete();
+			break;
+		case 5:
 			System.out.println("[이전메뉴로 이동]");
 			break;
 		default:
@@ -285,6 +290,12 @@ public class ProjectController {
 	
 
 
+	private void projectEmpDelete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	private void projectEmpModify() {
 		// TODO Auto-generated method stub
 		
@@ -292,17 +303,36 @@ public class ProjectController {
 
 
 	private void projectEmpAdd() {
-		// TODO Auto-generated method stub
+		List<ProjectVO> boardList = projectService.getPjAll();
+		for(ProjectVO tmp : boardList) {
+			System.out.println(tmp);
+		}System.out.println("");
+		
+		System.out.print("직원ID : ");
+		sc.nextLine();
+		String id = sc.nextLine();
+		System.out.print("프로젝트 번호 : ");
+		int num = sc.nextInt();
+		System.out.print("직원역할 : ");
+		sc.nextLine();
+		String role = sc.nextLine();
+		
+		if(id == "" || num == 0 || role == "") {
+			System.out.println("잘못 입력했습니다");
+		}else {
+			Project_infoVO project_info = new Project_infoVO(id, num, role);
+			if(projectService.insertProject_info(project_info)) {
+				System.out.println("프로젝트 등록 완료");
+			}else {
+				System.out.println("프로젝트 등록 실패");
+			}
+		}
+		
 		
 	}
 
 
 	private void projectEmpSearch() {
-		//전체조회
-		
-		//프로젝트별 조회
-		
-		//id조회
 		System.out.println("");
 		System.out.println("=======조회=======");
 		System.out.println("1. 프로젝트 직원 전체조회");
@@ -333,14 +363,26 @@ public class ProjectController {
 	}
 	
 	private void projectAllEmp() {
+		List<ProjectVO> List = projectService.getPjAllEmp1();
+		List<Project_infoVO> infoList = projectService.getPjAllEmp2();
 		
+		int i = 1;
+		for(Project_infoVO tmp1 : infoList) {
+			if(tmp1.getPi_pj_num() == i) {
+				for(ProjectVO tmp : List) {
+					if(tmp.getPj_num() == i) {
+						System.out.println(tmp);
+					}
+				}i++;
+			}System.out.println(tmp1);
+		}	
 	}
 	
 	private void projectNumEmp() {
 		List<ProjectVO> boardList = projectService.getPjAll();
 		for(ProjectVO tmp : boardList) {
 			System.out.println(tmp);
-		}
+		}System.out.println("");
 		
 		System.out.print("프로젝트 번호 : ");
 		int num = sc.nextInt();
@@ -348,7 +390,19 @@ public class ProjectController {
 		if(dbProject == null) {
 			System.out.println("존재하지않는 프로젝트");
 		}else {
-			Project_infoVO dbproject_info = projectService.selectProject_info(num);
+			List<ProjectVO> List = projectService.getPjAllEmp1();
+			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+			
+			for(ProjectVO tmp : List) {
+				if(tmp.getPj_num() == num) {
+					System.out.println(tmp);
+				}
+			}
+			for(Project_infoVO tmp1 : infoList) {
+				if(tmp1.getPi_pj_num() == num) {
+					System.out.println(tmp1);
+				}
+			}	
 		}
 		
 	}

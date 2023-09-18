@@ -35,6 +35,13 @@ public interface ProjectDAO {
 
 	ProjectVO selectProjectNum(@Param("pj_num")int num);
 
+	List<ProjectVO> selectPjAllEmp1();
+	
+	List<Project_infoVO> selectPjAllEmp2();
+
+	void insertProject_info(@Param("project_info")Project_infoVO project_info);
+
+
 	
 
 	

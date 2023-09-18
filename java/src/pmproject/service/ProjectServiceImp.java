@@ -165,6 +165,27 @@ public class ProjectServiceImp implements ProjectService{
 		}
 		return dbProject;
 	}
+	
+	@Override
+	public List<ProjectVO> getPjAllEmp1() {
+		return projectDao.selectPjAllEmp1();
+	}
+
+	@Override
+	public List<Project_infoVO> getPjAllEmp2() {
+		return projectDao.selectPjAllEmp2();
+	}
+
+	@Override
+	public boolean insertProject_info(Project_infoVO project_info) {
+		if(project_info == null || project_info.getPi_ep_id() == null || project_info.getPi_role() == null) {
+			return false;
+		}
+		projectDao.insertProject_info(project_info);
+		return true;
+	}
+
+	
 
 	
 	

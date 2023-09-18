@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import pmproject.vo.ProjectVO;
+import pmproject.vo.Project_infoVO;
 
 public interface ProjectDAO {
 
@@ -18,7 +19,11 @@ public interface ProjectDAO {
 
 	ProjectVO selectProject(@Param("pj_name")String pj_name);
 
-	void insertProject(@Param("project")ProjectVO project);
+	void insertProject1(@Param("project")ProjectVO project);
+	
+	void insertProject2(@Param("project")ProjectVO project);
+	
+	void insertProject3(@Param("project")ProjectVO project);
 
 	void updateName(@Param("pj_num")int pj_num, @Param("pj_name")String newName);
 
@@ -27,6 +32,13 @@ public interface ProjectDAO {
 	void updateEnd_date(@Param("pj_num")int pj_num, @Param("pj_end_date")String newEnd_date);
 
 	void updateState(@Param("pj_num")int pj_num, @Param("pj_state")String newState);
+
+	ProjectVO selectProjectNum(@Param("pj_num")int num);
+
+	
+
+	
+
 
 
 	

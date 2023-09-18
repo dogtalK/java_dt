@@ -6,7 +6,7 @@ public class Main {
 		
 		private static MemberController memberController = new MemberController();
 		private static ProjectController projectController = new ProjectController();
-		private static AttandanceController attandanceController = new AttandanceController();
+		private static AttendanceController attendanceController = new AttendanceController();
 		
 		public static void main(String[] args) {
 			int menu;
@@ -41,7 +41,7 @@ public class Main {
 				projectController.run();
 				break;
 			case 3:
-				attandanceController.run();
+				attendanceController.run();
 				break;
 			case 4:
 				System.out.println("[프로그램 종료]");
@@ -49,7 +49,6 @@ public class Main {
 			default:
 				System.out.println("[잘못된 메뉴 선택!]");
 			}
-			
 			
 		}
 

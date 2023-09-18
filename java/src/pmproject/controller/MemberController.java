@@ -16,11 +16,12 @@ import pmproject.vo.TransferVO;
 public class MemberController {
 
 	private MemberService memberService = new MemberServiceImp();
+	private EPController epController = new EPController();
 	Scanner sc = new Scanner(System.in);
 
 	public void run() {
 		int menu;
-		final int EXIT = 5;
+		final int EXIT = 4;
 		do {
 			printMenu();
 			menu = sc.nextInt();
@@ -34,9 +35,8 @@ public class MemberController {
 		System.out.println("=====직원 관리=====");
 		System.out.println("1. 직원 등록");
 		System.out.println("2. 직원 정보 관리");
-		System.out.println("3. 직원 휴가 관리");
-		System.out.println("4. 직원 퇴사/휴직 관리");
-		System.out.println("5. 이전 메뉴");
+		System.out.println("3. 직원 퇴사 및 휴가 관리");
+		System.out.println("4. 이전 메뉴");
 		System.out.println("=================");
 		System.out.print("메뉴 선택 : ");
 		
@@ -51,12 +51,9 @@ public class MemberController {
 			infoManagementMenu();
 			break;
 		case 3:
-			leaveManagementMenu();
+			epController.run();
 			break;
 		case 4:
-			retirementManagementMenu();
-			break;
-		case 5:
 			System.out.println("[이전메뉴로 이동]");
 			break;
 		default:
@@ -116,13 +113,12 @@ public class MemberController {
 
 
 	private void searchTransfer() {
-		System.out.println("부서 이동 내역 조회할 직원 연락처 : ");
-		String phone = sc.next();
-		if(memberService.selectMember(phone) == null) {
+		System.out.print("부서 이동 내역 조회할 직원 사번 : ");
+		String id = sc.next();
+		if(memberService.selectMember(id) == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
-			MemberVO dbMember = memberService.selectMember(phone);
-			List<TransferVO> transferHistory = memberService.SearchTransfer(dbMember.getEp_id());
+			List<TransferVO> transferHistory = memberService.SearchTransfer(id);
 			if(transferHistory == null) {
 				System.out.println("부서이동 내역이 없습니다.");
 				return;
@@ -137,13 +133,14 @@ public class MemberController {
 
 
 	private void giveSalary() {
-		System.out.println("급여 지급할 직원 연락처 : ");
-		String phone = sc.next();
-		if(memberService.selectMember(phone) == null) {
+		System.out.print("급여 지급할 직원 사번 : ");
+		String id = sc.next();
+		if(memberService.selectMember(id) == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
-			MemberVO dbMember = memberService.selectMember(phone);
-			System.out.println("[연락처 조회결과]");
+			MemberVO dbMember = memberService.selectMember(id);
+			System.out.println("[직원 조회결과]");
+			System.out.println("사번 : " + dbMember.getEp_id());
 			System.out.println("이름 : " + dbMember.getEp_name());
 			System.out.println("이메일 : " + dbMember.getEp_email());
 			System.out.println("연락처 : " + dbMember.getEp_phone_num());
@@ -160,9 +157,14 @@ public class MemberController {
 			sc.nextLine();
 			System.out.print("지급할 급여 유형 : ");
 			String salaryType = sc.nextLine();
+			SalaryVO salaryVO = new SalaryVO(salaryType);
+			if(!SalaryTypeList.contains(salaryVO)) {
+				System.out.println("[존재하지 않는 급여 유형입니다!]");
+				return;
+			}
 			System.out.print("급여 상세 : ");
 			String salaryDetail = sc.nextLine();
-			System.out.println("급여액(만원) : ");
+			System.out.print("급여액(만원) : ");
 			int salary = sc.nextInt();
 			if(memberService.insertSalaryHistory(dbMember.getEp_id(), salaryType, salaryDetail, today, salary)) {
 				System.out.println("[급여 지급 완료]");
@@ -175,13 +177,12 @@ public class MemberController {
 
 
 	private void searchSalaryHistory() {
-		System.out.println("급여 내역 조회할 직원 연락처 : ");
-		String phone = sc.next();
-		if(memberService.selectMember(phone) == null) {
+		System.out.print("급여 내역 조회할 직원 사번 : ");
+		String id = sc.next();
+		if(memberService.selectMember(id) == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
-			MemberVO dbMember = memberService.selectMember(phone);
-			List<SalaryHistoryVO> salaryHistory = memberService.SearchSalaryHistory(dbMember.getEp_id());
+			List<SalaryHistoryVO> salaryHistory = memberService.SearchSalaryHistory(id);
 			if(salaryHistory == null) {
 				System.out.println("급여 지급 이력이 없습니다.");
 				return;
@@ -196,20 +197,21 @@ public class MemberController {
 
 
 	private void modifySalary() {
-		System.out.print("수정할 직원 연락처 : ");
-		String phone = sc.next();
-		if(memberService.selectMember(phone) == null) {
+		System.out.print("수정할 직원 사번 : ");
+		String id = sc.next();
+		if(memberService.selectMember(id) == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
-			MemberVO dbMember = memberService.selectMember(phone);
-			System.out.println("[연락처 조회결과]");
+			MemberVO dbMember = memberService.selectMember(id);
+			System.out.println("[직원 조회결과]");
+			System.out.println("사번 : " + dbMember.getEp_id());
 			System.out.println("이름 : " + dbMember.getEp_name());
 			System.out.println("이메일 : " + dbMember.getEp_email());
 			System.out.println("연락처 : " + dbMember.getEp_phone_num());
 			System.out.println("월급여(만원) : " + dbMember.getEp_salary());
 			System.out.print("변경된 월급여(만원) : ");
 			int salary = sc.nextInt();
-			if(memberService.updateSalary(phone, salary)) {
+			if(memberService.updateSalary(id, salary)) {
 				System.out.println("[급여 변경 완료]");
 			} else {
 				System.out.println("[급여 변경 실패]");
@@ -219,13 +221,14 @@ public class MemberController {
 
 
 	private void modifyDepartment() {
-		System.out.print("수정할 직원 연락처 : ");
-		String phone = sc.next();
-		if(memberService.selectMember(phone) == null) {
+		System.out.print("수정할 직원 사번 : ");
+		String id = sc.next();
+		if(memberService.selectMember(id) == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
-			MemberVO dbMember = memberService.selectMember(phone);
-			System.out.println("[연락처 조회결과]");
+			MemberVO dbMember = memberService.selectMember(id);
+			System.out.println("[직원 조회결과]");
+			System.out.println("사번 : " + dbMember.getEp_id());
 			System.out.println("이름 : " + dbMember.getEp_name());
 			System.out.println("이메일 : " + dbMember.getEp_email());
 			System.out.println("연락처 : " + dbMember.getEp_phone_num());
@@ -243,7 +246,7 @@ public class MemberController {
 			LocalDate date = LocalDate.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String today = date.format(formatter);
-			if(memberService.updateDept(phone, dept, reason, today, dbMember.getEp_id())) {
+			if(memberService.updateDept(id, dept, reason, today, dbMember.getEp_id())) {
 				System.out.println("[부서 변경 완료]");
 			} else {
 				System.out.println("[부서 변경 실패]");
@@ -255,19 +258,20 @@ public class MemberController {
 
 
 	private void modifyContact() {
-		System.out.print("수정할 직원 연락처 : ");
-		String phone = sc.next();
-		if(memberService.selectMember(phone) == null) {
+		System.out.print("수정할 직원 사번 : ");
+		String id = sc.next();
+		if(memberService.selectMember(id) == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
-			MemberVO dbMember = memberService.selectMember(phone);
-			System.out.println("[연락처 조회결과]");
+			MemberVO dbMember = memberService.selectMember(id);
+			System.out.println("[직원 조회결과]");
+			System.out.println("사번 : " + dbMember.getEp_id());
 			System.out.println("이름 : " + dbMember.getEp_name());
 			System.out.println("이메일 : " + dbMember.getEp_email());
 			System.out.println("연락처 : " + dbMember.getEp_phone_num());
 			System.out.print("변경된 연락처 : ");
 			String newPhone = sc.next();
-			if(memberService.updatePhone(phone, newPhone)) {
+			if(memberService.updatePhone(id, newPhone)) {
 				System.out.println("[연락처 변경 완료]");
 			} else {
 				System.out.println("[연락처 변경 실패]");
@@ -280,9 +284,9 @@ public class MemberController {
 
 
 	private void searchMember() {
-		System.out.print("조회할 직원 연락처 : ");
-		String phone = sc.next();
-		MemberVO dbMember = memberService.selectMember(phone);
+		System.out.print("조회할 직원 사번 : ");
+		String id = sc.next();
+		MemberVO dbMember = memberService.selectMember(id);
 		if(dbMember == null) {
 			System.out.println("[직원 조회 실패]");
 		} else {
@@ -290,48 +294,6 @@ public class MemberController {
 		}
 		
 	}
-
-
-	private void leaveManagementMenu() {
-		int menu;
-		final int EXIT = 3;
-		do {
-			System.out.println("=====직원 휴가 관리=====");
-			System.out.println("1. 직원 휴가 조회");
-			System.out.println("2. 직원 휴가 신청");
-			System.out.println("3. 이전 메뉴");
-			System.out.println("=================");
-			System.out.print("메뉴 선택 : ");
-			menu = sc.nextInt();
-			switch(menu) {
-			case 1:
-				searchLeave();
-				break;
-			case 2:
-				useLeave();
-				break;
-			case 3:
-				System.out.println("[이전 메뉴로 이동]");
-				break;
-			default:
-				System.out.println("[잘못된 메뉴 선택!]");
-			}
-		}while(menu != EXIT);
-		
-	}
-
-
-	private void useLeave() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void searchLeave() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	private void register() {
 		
@@ -344,61 +306,18 @@ public class MemberController {
 		System.out.print("협상 월급여(만원) : ");
 		int salary = sc.nextInt();
 		MemberVO member = new MemberVO(name, email, phone, salary);
+		int memberCount = memberService.selectMemberCount() + 1;
+		String firstLetter = "PM";
+		String num = "" + memberCount;
+		for(int i = 0; i < (8 - num.length()); i++) {
+			num = "0" + num;
+		}
+		member.setEp_id(firstLetter + num);
 		if(memberService.insertMember(member)) {
 			System.out.println("[직원 등록 완료]");
 		} else {
 			System.out.println("[직원 등록 실패]");
 		}	
-		
-	}
-	
-	private void retirementManagementMenu() {
-		int menu;
-		final int EXIT = 4;
-		do {
-			System.out.println("=====직원 퇴사/휴직 관리=====");
-			System.out.println("1. 직원 퇴사/휴직 조회");
-			System.out.println("2. 직원 퇴사 처리");
-			System.out.println("3. 직원 휴직 처리");
-			System.out.println("4. 이전 메뉴");
-			System.out.println("=================");
-			System.out.print("메뉴 선택 : ");
-			menu = sc.nextInt();
-			switch(menu) {
-			case 1:
-				searchRetirement();
-				break;
-			case 2:
-				doRetirement();
-				break;
-			case 3:
-				doBreak();
-				break;
-			case 4:
-				System.out.println("[이전 메뉴로 이동]");
-				break;
-			default:
-				System.out.println("[잘못된 메뉴 선택!]");
-			}
-		}while(menu != EXIT);
-		
-	}
-
-
-	private void doBreak() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void doRetirement() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void searchRetirement() {
-		// TODO Auto-generated method stub
 		
 	}
 

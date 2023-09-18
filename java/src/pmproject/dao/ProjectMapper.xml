@@ -18,9 +18,17 @@
 	<select id="selectProject" resultType="pmproject.vo.ProjectVO">
   		select * from project where pj_name = #{pj_name};
   	</select>
-  	<insert id="insertProject">
+  	<insert id="insertProject1">
+		insert into project(pj_name, pj_state) 
+		values(#{project.pj_name}, "예정"); 
+	</insert>
+	<insert id="insertProject2">
+		insert into project(pj_name, pj_start_date, pj_state) 
+		values(#{project.pj_name}, #{project.pj_start_date}, "진행"); 
+	</insert>
+	<insert id="insertProject3">
 		insert into project(pj_name, pj_start_date, pj_end_date, pj_state) 
-		values(#{project.pj_name}, #{project.pj_start_date}, #{project.pj_end_date}, #{project.pj_state}); 
+		values(#{project.pj_name}, #{project.pj_start_date}, #{project.pj_end_date}, "종료"); 
 	</insert>
 	<update id="updateName">
 		update project set pj_name = #{pj_name} where pj_num = #{pj_num};
@@ -34,4 +42,7 @@
 	<update id="updateState">
 		update project set pj_state = #{pj_state} where pj_num = #{pj_num};
 	</update>
+	<select id="selectProjectNum" resultType="pmproject.vo.ProjectVO">
+  		select * from project where pj_num = #{pj_num};
+  	</select>
 </mapper>

@@ -3,7 +3,6 @@ package pmproject.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Scanner;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,8 +10,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import pmproject.dao.ProjectDAO;
-import pmproject.vo.MemberVO;
 import pmproject.vo.ProjectVO;
+import pmproject.vo.Project_infoVO;
 
 public class ProjectServiceImp implements ProjectService{
 
@@ -51,13 +50,41 @@ public class ProjectServiceImp implements ProjectService{
 	}
 
 	@Override
-	public boolean insertProject(ProjectVO project) {
+	public boolean insertProject1(ProjectVO project) {
 		if(project == null || project.getPj_name() == null) {
 			return false;
 		}
 		ProjectVO dbProject = projectDao.selectProject(project.getPj_name());
 		if(dbProject == null) {
-			projectDao.insertProject(project);
+			projectDao.insertProject1(project);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean insertProject2(ProjectVO project) {
+		if(project == null || project.getPj_name() == null) {
+			return false;
+		}
+		ProjectVO dbProject = projectDao.selectProject(project.getPj_name());
+		if(dbProject == null) {
+			projectDao.insertProject2(project);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean insertProject3(ProjectVO project) {
+		if(project == null || project.getPj_name() == null) {
+			return false;
+		}
+		ProjectVO dbProject = projectDao.selectProject(project.getPj_name());
+		if(dbProject == null) {
+			projectDao.insertProject3(project);
 			return true;
 		}
 		
@@ -129,6 +156,21 @@ public class ProjectServiceImp implements ProjectService{
 		return true;
 	}
 
+	@Override
+	public ProjectVO selectProject(int num) {
+		
+		ProjectVO dbProject = projectDao.selectProjectNum(num);
+		if(dbProject == null) {
+			return null;
+		}
+		return dbProject;
+	}
+
+	
+	
+
+	
+	
 	
 	
 

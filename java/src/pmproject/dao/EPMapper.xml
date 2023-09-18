@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pmproject.dao.EPDAO">
+	<select id ="selectEPList" resultType="pmproject.vo.MemberVO">
+		select
+			*
+		from 
+			employee
+		ORDER BY
+		    ep_id;
+	</select>
+	<select id="selectEP" resultType="pmproject.vo.MemberVO">
+  		select * from employee where ep_id = #{ep_id}
+ 	 </select>
+	<update id="deleteEP">
+  		update employee set ep_st_num = #{stNum}, ep_leave = 0, ep_salary = 0  where ep_id = #{ep_id}
+ 	</update>
+ 	<update id="updateEP">
+  	update employee
+  		set
+	    ep_name = #{dbEp.ep_name},
+	    ep_email = #{dbEp.ep_email},
+	    ep_phone_num = #{dbEp.ep_phone_num},
+	    ep_dm_num = #{dbEp.ep_dm_num},
+	    ep_po_num = #{dbEp.ep_po_num},
+	    ep_st_num = #{dbEp.ep_st_num},
+	    ep_leave = #{dbEp.ep_leave},
+	    ep_salay = #{dbEp.ep_salay}
+	  	where ep_id = #{dbEp.ep_id}
+  	</update>
+ 	<insert id="insertTm">
+ 		insert into termination(tm_date, tm_reason, tm_ep_id) values(#{today}, '퇴직', #{ep_id})
+ 	</insert>
+</mapper>

@@ -7,7 +7,7 @@ USE PMproject;
 DROP TABLE IF EXISTS `employee`;
 
 CREATE TABLE `employee` (
-	`ep_id`	INT	NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	`ep_id`	VARCHAR(20)	NOT NULL PRIMARY KEY,
 	`ep_name`	VARCHAR(20)	NOT NULL,
 	`ep_email`	VARCHAR(50)	NOT NULL,
 	`ep_phone_num`	VARCHAR(15)	NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `Leave` (
 	`le_start_date`	DATE	NOT NULL,
 	`le_end_date`	DATE	NOT NULL,
 	`le_type`	VARCHAR(30)	NOT NULL,
-	`le_ep_id`	INT	NOT NULL
+	`le_ep_id`	VARCHAR(20)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `salaryHistory`;
@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `salaryHistory`;
 CREATE TABLE `salaryHistory` (
 	`sh_num`	INT	NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`sh_payday`	DATE	NOT NULL,
-	`sh_ep_id`	INT	NOT NULL,
+	`sh_ep_id`	VARCHAR(20)	NOT NULL,
 	`sh_pa_type`	VARCHAR(20)	NOT NULL,
     `sh_type_detail`	VARCHAR(20)	NOT NULL,
 	`sh_salary`	INT	NOT NULL
@@ -68,9 +68,8 @@ DROP TABLE IF EXISTS `Termination`;
 CREATE TABLE `Termination` (
 	`tm_num`	INT	NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`tm_date`	DATE	NOT NULL,
-	`tm_return_date`	DATE	NULL,
 	`tm_reason`	VARCHAR(30)	NOT NULL,
-	`tm_ep_id`	INT	NOT NULL
+	`tm_ep_id`	VARCHAR(20)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `at_record`;
@@ -92,7 +91,7 @@ DROP TABLE IF EXISTS `project_info`;
 
 CREATE TABLE `project_info` (
 	`pi_num`	INT	NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	`pi_ep_id`	INT	NOT NULL,
+	`pi_ep_id`	VARCHAR(20)	NOT NULL,
 	`pi_pj_num`	INT	NOT NULL,
 	`pi_role`	VARCHAR(20)	NOT NULL
 );
@@ -110,7 +109,7 @@ CREATE TABLE `transfer` (
 	`tr_num`	INT	NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`tr_date`	DATE	NOT NULL,
     `tr_reason`	VARCHAR(30)	NOT NULL,
-	`tr_ep_id`	INT	NOT NULL,
+	`tr_ep_id`	VARCHAR(20)	NOT NULL,
 	`tr_dm_num`	INT	NOT NULL
 );
 
@@ -125,7 +124,7 @@ DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE `attendance` (
 	`ad_num`	INT	NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`ad_date`	DATE	NOT NULL,
-    `ad_ep_id`	INT	NOT NULL,
+    `ad_ep_id`	VARCHAR(20)	NOT NULL,
     `ad_at_num`	INT	NOT NULL DEFAULT 1
 );
 
@@ -226,4 +225,3 @@ ALTER TABLE `attendance` ADD CONSTRAINT `FK_employee_TO_attendance_1` FOREIGN KE
 REFERENCES `employee` (
 	`ep_id`
 );
-

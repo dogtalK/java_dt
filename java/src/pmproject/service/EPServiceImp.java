@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import pmproject.dao.EPDAO;
 import pmproject.dao.MemberDAO;
 import pmproject.vo.MemberVO;
+import pmproject.vo.TransferVO;
 
 public class EPServiceImp implements EPService{
 

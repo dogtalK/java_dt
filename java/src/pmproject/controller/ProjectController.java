@@ -100,7 +100,7 @@ public class ProjectController {
 		ProjectVO dbProject = projectService.selectProject(name);
 		if(dbProject == null) {
 			System.out.println("");
-			System.out.println("존재하지 않는 프로젝트");
+			System.out.println("[존재하지 않는 프로젝트]");
 			System.out.println("");
 		}else {
 			System.out.println("=====================================");
@@ -130,7 +130,7 @@ public class ProjectController {
 				projectService.updateName(name, newName);		
 			}
 			System.out.println("");
-			System.out.println("프로젝트 정보가 변경되었습니다");
+			System.out.println("[정보가 변경되었습니다]");
 			System.out.println("");
 		}
 		
@@ -138,7 +138,6 @@ public class ProjectController {
 
 
 	private void projectInfoAdd() {
-		//이름 중복체크 추가해야함
 		System.out.print("프로젝트 명 : ");
 		sc.nextLine();
 		String name = sc.nextLine();
@@ -148,30 +147,30 @@ public class ProjectController {
 		String end_date = sc.nextLine();
 		
 		if(name == "" || (start_date == "" && end_date != "")) {
-			System.out.println("프로젝트 등록 실패");
+			System.out.println("[프로젝트 등록 실패]");
 		}else {
 			if(start_date == "" && end_date == "") {
 				ProjectVO project = new ProjectVO(name);
 				if(projectService.insertProject1(project)) {
-					System.out.println("프로젝트 등록 완료");
+					System.out.println("[프로젝트 등록 완료]");
 				}else {
-					System.out.println("프로젝트 등록 실패");
+					System.out.println("[프로젝트 등록 실패]");
 				}
 			}
 			if(start_date != "" && end_date == "") {
 				ProjectVO project = new ProjectVO(name, start_date);
 				if(projectService.insertProject2(project)) {
-					System.out.println("프로젝트 등록 완료");
+					System.out.println("[프로젝트 등록 완료]");
 				}else {
-					System.out.println("프로젝트 등록 실패");
+					System.out.println("프로젝트 등록 실패]");
 				}
 			}
 			if(start_date != "" && end_date != "") {
 				ProjectVO project = new ProjectVO(name, start_date, end_date);
 				if(projectService.insertProject3(project)) {
-					System.out.println("프로젝트 등록 완료");
+					System.out.println("[프로젝트 등록 완료]");
 				}else {
-					System.out.println("프로젝트 등록 실패");
+					System.out.println("[프로젝트 등록 실패]");
 				}
 			}
 		}
@@ -291,13 +290,105 @@ public class ProjectController {
 
 
 	private void projectEmpDelete() {
-		// TODO Auto-generated method stub
+		System.out.print("직원ID : ");
+		sc.nextLine();
+		String id = sc.nextLine();
+		int num = 0;
+		if(memberService.selectMember(id) == null) {
+			System.out.println("[직원 조회 실패]");
+		}else {
+			System.out.println("");
+			System.out.println("[참여한 프로젝트]");
+			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+			for(Project_infoVO tmp1 : infoList) {
+				if(tmp1.getPi_ep_id().equals(id)){
+					num = tmp1.getPi_pj_num();
+					List<ProjectVO> List = projectService.getPjAllEmp1();
+					for(ProjectVO tmp : List) {
+						if(tmp.getPj_num() == num) {
+							System.out.println(tmp);
+						}
+					}
+					System.out.print("등록번호 : " + tmp1.getPi_num() + ", ");
+					System.out.println(tmp1);
+				}
+			}
+			System.out.print("삭제할 등록번호 : ");
+			int piNum = sc.nextInt();
+			Project_infoVO dbProject_info = projectService.selectProject_info(piNum);
+			if(dbProject_info == null) {
+				System.out.println("");
+				System.out.println("[존재하지 않는 등록번호]");
+				System.out.println("");
+			}else {
+				projectService.deleteProject_info(piNum);
+				System.out.println("[정보가 삭제되었습니다]");
+			}
+		}
 		
 	}
 
 
 	private void projectEmpModify() {
-		// TODO Auto-generated method stub
+		System.out.print("직원ID : ");
+		sc.nextLine();
+		String id = sc.nextLine();
+		int num = 0;
+		if(memberService.selectMember(id) == null) {
+			System.out.println("[직원 조회 실패]");
+		}else {
+			System.out.println("");
+			System.out.println("[참여한 프로젝트]");
+			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+			for(Project_infoVO tmp1 : infoList) {
+				if(tmp1.getPi_ep_id().equals(id)){
+					num = tmp1.getPi_pj_num();
+					List<ProjectVO> List = projectService.getPjAllEmp1();
+					for(ProjectVO tmp : List) {
+						if(tmp.getPj_num() == num) {
+							System.out.println(tmp);
+						}
+					}
+					System.out.print("등록번호 : " + tmp1.getPi_num() + ", ");
+					System.out.println(tmp1);
+				}
+			}
+			System.out.println("");
+			System.out.print("수정할 등록번호 : ");
+			int piNum = sc.nextInt();
+			Project_infoVO dbProject_info = projectService.selectProject_info(piNum);
+			if(dbProject_info == null) {
+				System.out.println("");
+				System.out.println("[존재하지 않는 등록번호]");
+				System.out.println("");
+			}else {
+				System.out.println("=====================================");
+				System.out.println("수정할 값을 넣어주세요 - 변경 내용이 없을 시 엔터");
+				System.out.println("=====================================");
+				System.out.print("프로젝트 번호 : ");
+				sc.nextLine();
+				String newPjNum = sc.nextLine();
+				System.out.print("역할 : ");
+				String newRole = sc.nextLine();
+				
+				if(newRole != "") {
+					projectService.updateRole(piNum, newRole);
+				}
+				if(newPjNum != "") {
+					int iv = Integer.parseInt(newPjNum);
+					ProjectVO dbProject = projectService.selectProject(iv);
+					if(dbProject == null) {
+						System.out.println("[존재하지 않는 프로젝트]");
+						return;
+					}else {
+						projectService.updatePjNum(piNum, iv);
+					}
+				}
+				System.out.println("");
+				System.out.println("[정보가 변경되었습니다]");
+				System.out.println("");
+			}
+		}
 		
 	}
 
@@ -318,16 +409,15 @@ public class ProjectController {
 		String role = sc.nextLine();
 		
 		if(id == "" || num == 0 || role == "") {
-			System.out.println("잘못 입력했습니다");
+			System.out.println("[잘못 입력했습니다]");
 		}else {
 			Project_infoVO project_info = new Project_infoVO(id, num, role);
 			if(projectService.insertProject_info(project_info)) {
-				System.out.println("프로젝트 등록 완료");
+				System.out.println("[프로젝트 등록 완료]");
 			}else {
-				System.out.println("프로젝트 등록 실패");
+				System.out.println("[프로젝트 등록 실패]");
 			}
 		}
-		
 		
 	}
 
@@ -336,8 +426,8 @@ public class ProjectController {
 		System.out.println("");
 		System.out.println("=======조회=======");
 		System.out.println("1. 프로젝트 직원 전체조회");
-		System.out.println("2. 프로젝트 직원조회 ");
-		System.out.println("3. 프로젝트 직원ID조회");
+		System.out.println("2. 프로젝트 번호 조회 ");
+		System.out.println("3. 프로젝트 직원ID 조회");
 		System.out.println("4. 이전 메뉴");
 		System.out.println("=================");
 		System.out.print("메뉴 선택 : ");
@@ -388,7 +478,7 @@ public class ProjectController {
 		int num = sc.nextInt();
 		ProjectVO dbProject = projectService.selectProject(num);
 		if(dbProject == null) {
-			System.out.println("존재하지않는 프로젝트");
+			System.out.println("[존재하지않는 프로젝트]");
 		}else {
 			List<ProjectVO> List = projectService.getPjAllEmp1();
 			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
@@ -408,12 +498,29 @@ public class ProjectController {
 	}
 
 	private void projectIdEmp() {
-		// TODO Auto-generated method stub
-		
+		System.out.print("직원ID : ");
+		sc.nextLine();
+		String id = sc.nextLine();
+		int num = 0;
+		if(memberService.selectMember(id) == null) {
+			System.out.println("[직원 조회 실패]");
+		}else {
+			System.out.println("");
+			System.out.println("[참여한 프로젝트]");
+			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+			for(Project_infoVO tmp1 : infoList) {
+				if(tmp1.getPi_ep_id().equals(id)){
+					num = tmp1.getPi_pj_num();
+					List<ProjectVO> List = projectService.getPjAllEmp1();
+					for(ProjectVO tmp : List) {
+						if(tmp.getPj_num() == num) {
+							System.out.println(tmp);
+						}
+					}
+					System.out.println(tmp1);
+				}
+			}	
+		}
 	}
 
-
-
-	
-	
 }

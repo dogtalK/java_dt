@@ -41,6 +41,15 @@ public interface ProjectDAO {
 
 	void insertProject_info(@Param("project_info")Project_infoVO project_info);
 
+	Project_infoVO selectProject_infoNum(@Param("pi_num")int piNum);
+
+	void updateRole(@Param("pi_num")int pi_num, @Param("pi_role")String newRole);
+
+	void updatePjNum(@Param("pi_num")int pi_num, @Param("pi_pj_num")int newPjNum);
+
+	boolean deleteProject_info(@Param("pi_num")int piNum);
+
+
 
 	
 

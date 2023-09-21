@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import pmproject.vo.DeptVO;
 import pmproject.vo.MemberVO;
-import pmproject.vo.Project_infoVO;
 import pmproject.vo.SalaryHistoryVO;
 import pmproject.vo.SalaryVO;
 import pmproject.vo.TransferVO;
@@ -44,6 +43,5 @@ public interface MemberDAO {
 	List<TransferVO> selectTransfer(@Param("ep_id") String ep_id);
 
 	int selectMemberCount();
-
 
 }

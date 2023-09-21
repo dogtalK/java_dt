@@ -39,6 +39,15 @@ public interface ProjectService {
 
 	boolean insertProject_info(Project_infoVO project_info);
 
+	Project_infoVO selectProject_info(int piNum);
+
+	boolean updateRole(int piNum, String newRole);
+
+	boolean updatePjNum(int piNum, int newPjNum);
+
+	boolean deleteProject_info(int piNum);
+
+
 	
 
 

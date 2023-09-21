@@ -185,11 +185,43 @@ public class ProjectServiceImp implements ProjectService{
 		return true;
 	}
 
-	
+	@Override
+	public Project_infoVO selectProject_info(int piNum) {
+		Project_infoVO dbProject_info = projectDao.selectProject_infoNum(piNum);
+		if(dbProject_info == null) {
+			return null;
+		}
+		return dbProject_info;
+	}
 
-	
-	
+	@Override
+	public boolean updateRole(int piNum, String newRole) {
+		Project_infoVO dbProject_piNum_info = projectDao.selectProject_infoNum(piNum);
+		if(dbProject_piNum_info == null) {
+			return false;
+		}
+		projectDao.updateRole(dbProject_piNum_info.getPi_num(), newRole);
+		return true;
+	}
 
+	@Override
+	public boolean updatePjNum(int piNum, int newPjNum) {
+		Project_infoVO dbProject_piNum_info = projectDao.selectProject_infoNum(piNum);
+		if(dbProject_piNum_info == null) {
+			return false;
+		}
+		Project_infoVO dbProject_newpjNum_info = projectDao.selectProject_infoNum(newPjNum);
+		if(dbProject_newpjNum_info == null) {
+			return false;
+		}
+		projectDao.updatePjNum(dbProject_piNum_info.getPi_num(), newPjNum);
+		return true;
+	}
+
+	@Override
+	public boolean deleteProject_info(int piNum) {
+		return projectDao.deleteProject_info(piNum);
+	}
 	
 	
 	

@@ -32,4 +32,6 @@ public interface MemberService {
 
 	int selectMemberCount();
 
+	List<MemberVO> getMemberList();
+
 }

@@ -310,6 +310,12 @@ public class ProjectController {
 						}
 					}
 					System.out.print("등록번호 : " + tmp1.getPi_num() + ", ");
+					List<MemberVO> memberList = memberService.getMemberList();
+					for(MemberVO tmp2 : memberList) {
+						if(tmp2.getEp_id().equals(tmp1.getPi_ep_id())) {
+							System.out.print("직원이름 : " + tmp2.getEp_name() + ", ");
+						}
+					}
 					System.out.println(tmp1);
 				}
 			}
@@ -350,6 +356,12 @@ public class ProjectController {
 						}
 					}
 					System.out.print("등록번호 : " + tmp1.getPi_num() + ", ");
+					List<MemberVO> memberList = memberService.getMemberList();
+					for(MemberVO tmp2 : memberList) {
+						if(tmp2.getEp_id().equals(tmp1.getPi_ep_id())) {
+							System.out.print("직원이름 : " + tmp2.getEp_name() + ", ");
+						}
+					}
 					System.out.println(tmp1);
 				}
 			}
@@ -453,18 +465,25 @@ public class ProjectController {
 	}
 	
 	private void projectAllEmp() {
-		List<ProjectVO> List = projectService.getPjAllEmp1();
+		List<ProjectVO> projectList = projectService.getPjAllEmp1();
 		List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+		List<MemberVO> memberList = memberService.getMemberList();
 		
 		int i = 1;
 		for(Project_infoVO tmp1 : infoList) {
 			if(tmp1.getPi_pj_num() == i) {
-				for(ProjectVO tmp : List) {
+				for(ProjectVO tmp : projectList) {
 					if(tmp.getPj_num() == i) {
 						System.out.println(tmp);
 					}
 				}i++;
-			}System.out.println(tmp1);
+			}
+			for(MemberVO tmp2 : memberList) {
+				if(tmp2.getEp_id().equals(tmp1.getPi_ep_id())) {
+					System.out.print("직원이름 : " + tmp2.getEp_name() + ", ");
+				}
+			}
+			System.out.println(tmp1);
 		}	
 	}
 	
@@ -482,6 +501,7 @@ public class ProjectController {
 		}else {
 			List<ProjectVO> List = projectService.getPjAllEmp1();
 			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+			List<MemberVO> memberList = memberService.getMemberList();
 			
 			for(ProjectVO tmp : List) {
 				if(tmp.getPj_num() == num) {
@@ -490,6 +510,11 @@ public class ProjectController {
 			}
 			for(Project_infoVO tmp1 : infoList) {
 				if(tmp1.getPi_pj_num() == num) {
+					for(MemberVO tmp2 : memberList) {
+						if(tmp2.getEp_id().equals(tmp1.getPi_ep_id())) {
+							System.out.print("직원이름 : " + tmp2.getEp_name() + ", ");
+						}
+					}
 					System.out.println(tmp1);
 				}
 			}	
@@ -508,6 +533,7 @@ public class ProjectController {
 			System.out.println("");
 			System.out.println("[참여한 프로젝트]");
 			List<Project_infoVO> infoList = projectService.getPjAllEmp2();
+			List<MemberVO> memberList = memberService.getMemberList();
 			for(Project_infoVO tmp1 : infoList) {
 				if(tmp1.getPi_ep_id().equals(id)){
 					num = tmp1.getPi_pj_num();
@@ -515,6 +541,11 @@ public class ProjectController {
 					for(ProjectVO tmp : List) {
 						if(tmp.getPj_num() == num) {
 							System.out.println(tmp);
+						}
+					}
+					for(MemberVO tmp2 : memberList) {
+						if(tmp2.getEp_id().equals(tmp1.getPi_ep_id())) {
+							System.out.print("직원이름 : " + tmp2.getEp_name() + ", ");
 						}
 					}
 					System.out.println(tmp1);

@@ -44,4 +44,6 @@ public interface MemberDAO {
 
 	int selectMemberCount();
 
+	List<MemberVO> selectMemberList();
+
 }

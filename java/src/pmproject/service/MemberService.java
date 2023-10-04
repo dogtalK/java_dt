@@ -31,7 +31,7 @@ public interface MemberService {
 	List<TransferVO> SearchTransfer(String ep_id);
 
 	int selectMemberCount();
-
+	
 	List<MemberVO> getMemberList();
 
 }

@@ -1,7 +1,5 @@
 package pmproject.controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,24 +8,22 @@ import pmproject.service.EPServiceImp;
 import pmproject.service.MemberService;
 import pmproject.service.MemberServiceImp;
 import pmproject.vo.MemberVO;
-import pmproject.vo.SalaryVO;
 
 public class EPController {
 	
 	private EPService epService = new EPServiceImp();
 	private MemberService memberService = new MemberServiceImp();
 	private static TimeoffController timeoffController = new TimeoffController();
+	Scanner sc = new Scanner(System.in);
 	
 	public void run() {
 		int menu;
 		final int EXIT = 4;
-		Scanner sc = new Scanner(System.in);
 		
 		do {
 			EPprintMenu();
 			menu = sc.nextInt();
 			runMenu(menu);
-			System.out.println("=================");
 		}while(menu != EXIT);
 		
 	}
@@ -93,4 +89,3 @@ public class EPController {
 	}
 	
 }
-

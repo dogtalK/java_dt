@@ -222,6 +222,7 @@ public class ProjectServiceImp implements ProjectService{
 	public boolean deleteProject_info(int piNum) {
 		return projectDao.deleteProject_info(piNum);
 	}
+
 	
 	
 	

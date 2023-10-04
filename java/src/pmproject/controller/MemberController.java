@@ -2,7 +2,6 @@ package pmproject.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +18,6 @@ public class MemberController {
 	private MemberService memberService = new MemberServiceImp();
 	private EPController epController = new EPController();
 	Scanner sc = new Scanner(System.in);
-
 	public void run() {
 		int menu;
 		final int EXIT = 4;

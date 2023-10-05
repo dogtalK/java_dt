@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>속성적용</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<style>
+		.btn-down, .btn-up{
+			width: 30px; height: 30px; line-height: 26px; background-color: #fff;
+			border-radius: 5px; font-size: 20px; cursor: pointer; box-sizing: border-box;
+		}
+		.page{
+			line-height: 30px; display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<!-- <button class="btn-down">&lt</button>
+		<span class="page">1/13</span>
+		<button class="btn-up">&gt</button> -->
+	</div>
+	<script type="text/babel">
+	
+		//넣을 요소
+		const container = document.getElementById('container');
+		//요소 생성
+		function Elemnt(){
+			let [counter, setCounter] = React.useState(1);
+			function up(){
+				if(counter < 13){
+					setCounter(counter + 1);
+				}
+			}
+			function down(){
+				if(counter > 1 ){
+					setCounter(counter - 1);
+				}
+			}
+			return (
+				<div>
+					<button onClick={down} className="btn-down">&lt;</button>
+					<span className="page">{counter}/13</span>		
+					<button onClick={up} className="btn-up">&gt;</button>			
+				</div>
+			);
+		}
+		//요소 배치
+		ReactDOM.render(<Elemnt/>, container);
+	</script>
+</body>
+</html>

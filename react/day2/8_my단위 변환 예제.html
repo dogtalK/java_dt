@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>state배열예제</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<!-- <input type="text">
+	<button></button>
+	<h1>To do list</h1>
+	<ul>
+		<li>등원</li>
+		<li>공부</li>
+		<li>점심</li>
+	</ul> -->
+	<script type="text/babel">
+		const root = document.getElementById("root");
+		/*
+		input 태그를 이용하여 분을 입력받고,
+		입력받은 분을 시로 변환하는 코드를 작성
+		60 => 1
+		61 => 1
+		120 => 2
+		*/
+		function App(){
+			let [min, setMin] = React.useState("");
+			let [hour, setHour] = React.useState("");
+			const onChange = (e)=> setMin(e.target.value);
+			const onClick = ()=>{
+				setHour(parseInt(min / 60));
+			}
+			return(
+				<div>
+					<input type="text" onChange={onChange} value={min}/>
+					<button onClick={onClick}>변환</button>
+					<div>{hour}</div>
+				</div>
+			)
+		}
+
+		ReactDOM.render(<App/>, root);
+	</script>
+</body>
+</html>

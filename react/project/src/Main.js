@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 function Main(){
-  let [page, setPage] = useState(10);
+  let [page, setPage] = useState(1);
   const leftBtnClick = ()=>{
     setPage(page == 1 ? 13 : page-1);
   }

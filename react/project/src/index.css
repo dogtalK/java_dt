@@ -4,7 +4,7 @@ body {
 
 .menu{
   height: 50px; background-color: aliceblue;
-  border: 1px solid black;
+  border: 2px solid black;
 }
 .menu-list{
   list-style: none; margin: 0; padding: 0;

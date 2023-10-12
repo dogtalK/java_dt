@@ -26,7 +26,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" exact element={<Home list={list} deleteBoard={deleteBoard} add={addBoard} />} />
-        <Route path='/Insert' element={<Insert/>}/>
+        <Route path='/insert' element={<Insert/>}/>
       </Routes>
     </BrowserRouter>
   );

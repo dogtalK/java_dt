@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 function Insert(){
 	const navigate = useNavigate();
-	const [num, setNum] = useState();
+	const [num, setNum] = useState(1);
 	const [title, setTitle] = useState('');
 	const [writer, setWriter] = useState('');
 
